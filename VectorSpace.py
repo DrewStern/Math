@@ -10,10 +10,10 @@ class VectorSpace():
     @abstractmethod
     def __add__(self, other):
         if type(self) != type(other):
-            return None
+            raise TypeError("Elements must be of the same type.")
 
         if len(self._components) != len(other._components):
-            raise IndexError("Vectors must be of the same length.")
+            raise IndexError("Elements must be of the same dimension.")
 
         newObj = copy.copy(self)
         newObj._components = [selfVal + otherVal for (selfVal, otherVal) in zip(self._components, other._components)]
@@ -27,10 +27,10 @@ class VectorSpace():
     @abstractmethod
     def __sub__(self, other):
         if type(self) != type(other):
-            return None
+            raise TypeError("Elements must be of the same type.")
 
         if len(self._components) != len(other._components):
-            raise IndexError("Vectors must be of the same length.")
+            raise IndexError("Elements must be of the same dimension.")
 
         newObj = copy.copy(self)
         newObj._components = [selfVal - otherVal for (selfVal, otherVal) in zip(self._components, other._components)]
@@ -47,7 +47,7 @@ class VectorSpace():
         newObj._components = [-component for component in self._components]
         return newObj
 
-    # calculates the length of the caller
+    # calculates the magnitude of the caller
     @abstractmethod
     def norm(self):
         newObj = copy.copy(self)
@@ -58,7 +58,7 @@ class VectorSpace():
 
         return math.sqrt(sumOfSquares)
 
-    # using the caller, derives a new element of the Vector Space with length 1
+    # using the caller, derives a new element of the Vector Space with magnitude 1
     @abstractmethod
     def normalize(self):
         newObj = copy.copy(self)

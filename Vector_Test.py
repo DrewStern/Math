@@ -28,6 +28,11 @@ class Vector_Test(unittest.TestCase):
         self.assertEqual(self.long1 + self.long2, Vector(10,10,10,10,10,10,10,10,10))
         self.assertEqual(self.long2 + self.long1, Vector(10,10,10,10,10,10,10,10,10))
 
+    def test_additionOfVectorWithNonvectorRaisesException(self):
+        with self.assertRaises(TypeError):
+            self.q + 1
+            1 + self.q
+
     def test_additionOfUnequalLengthVectorsRaisesException(self):
         with self.assertRaises(IndexError):
             self.q + self.long1
@@ -42,6 +47,11 @@ class Vector_Test(unittest.TestCase):
         with self.assertRaises(IndexError):
             self.q - self.long1
             self.long1 - self.q
+
+    def test_subtractionOfVectorWithNonvectorRaisesException(self):
+        with self.assertRaises(TypeError):
+            self.q + 1
+            1 + self.q
 
     def test_scalarMultiplication(self):
         self.assertEqual(3.3 * self.q, Vector(3.3, 33.0, 330.0))
