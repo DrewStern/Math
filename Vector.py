@@ -5,6 +5,7 @@ from functools import *
 
 class Vector(VectorSpace):
 
+    # TODO: validate that all components are of int/float type
     def __init__(self, *components):
         self._components = list(components)
 
@@ -52,6 +53,10 @@ class Vector(VectorSpace):
         
         componentList = [selfVal*otherVal for selfVal, otherVal in zip(self._components, other._components)]
         return reduce(lambda x, y: x+y, componentList)
+
+    # Calculates the angle between this Vector and the other.
+    def angle_between(self, other):
+        return math.acos(self.dot(other) / self.norm() * other.norm())
 
     # Determines whether this Vector is orthogonal (perpendicular) to the other Vector.
     def is_orthogonal(self, other):
