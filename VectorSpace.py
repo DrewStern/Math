@@ -2,6 +2,7 @@ from abc import ABCMeta, abstractmethod
 import copy
 import math
 
+# abstract class representing a Vector Space with an unknown number of dimensions
 class VectorSpace():
     __metaclass__ = ABCMeta
 

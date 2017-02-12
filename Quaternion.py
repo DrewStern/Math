@@ -2,25 +2,26 @@ import math
 from Vector import Vector
 from VectorSpace import VectorSpace
 
-# A quaternion is a non-commutative element which can be denoted as
-# a*1 + b*i + c*j + d*k for a, b, c, d in the Real numbers
-# 1, i, j, k are the standard basis elements of the space
-# the space is denoted as H (for Hamilton)
+# A Quaternion is an element which can be denoted as a*1 + b*i + c*j + d*k for a, b, c, d in the Real numbers.
+# This space is denoted as H (for Hamilton), and has 1, i, j, k as its standard basis elements.
+
+# Note that despite the fact that this inherits from VectorSpace, the Quaternions do not actually form a
+# Vector Space, because any two elements of H are anti-commutative with one another. That is: q*p != p*q.
 class Quaternion(VectorSpace):
 
-    #def __init__(self, *components):
-    #    self._components = list(components)
+    # Constructor for the Quaternion class.
     def __init__(self, h = 0.0, i = 0.0, j = 0.0, k = 0.0):
         self._h = h
         self._i = i
         self._j = j
         self._k = k
 
-    # multiplies a Quaternion by either another Quaternion or an integer/float
-    # note that because H is noncommutative, q*p != p*q
+        # this only exists in order to leverage the inheritance from VectorSpace
+        self._components = [self._h, self._i, self._j, self._k]
+
+    # Multiplies a Quaternion by either another Quaternion or an integer/float,
     def __mul__(self, other):
         if type(other) == int or type(other) == float:
-            #return Quaternion(*[other*component for component in self._components])
             return Quaternion(other*self._h, other*self._i, other*self._j, other*self._k)
         elif type(other) == Quaternion:
             return Quaternion(
@@ -29,31 +30,26 @@ class Quaternion(VectorSpace):
                 (self._h * other._j) - (self._i * other._k) + (self._j * other._h) + (self._k * other._i),
                 (self._h * other._k) + (self._i * other._j) - (self._j * other._i) + (self._k * other._h))
 
-            #scalarPart = self.scalar_part()*other.scalar_part() - self.vector_part().dot(other.vector_part())
-            #vectorPart1 = self.scalar_part()*other.vector_part()
-            #vectorPart2 = self.vector_part()*other.scalar_part()
-            #vectorPart3 = self.vector_part()*other.vector_part()
-            #totalVectorPart = vectorPart1+vectorPart2+vectorPart3
-            return Quaternion(scalarPart, totalVectorPart)
-
+    # The left-multiplication method __mul__ already handles the anti-commutativity.
     def __rmul__(self, other):
         return self*other
 
-    # divides a Quaternion by an integer
+    # Divides a Quaternion by an integer.
     # TODO: ensure that 'other' is a valid type
     def __div__(self, other):
         if other == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
-        #return Quaternion(*[component/other for component in self._components])
+
         return Quaternion(self._h/other, self._i/other, self._j/other, self._k/other)
 
+    # TODO: make this leverage the existing __div__ method
     def __truediv__(self, other):
         if other == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
-        #return Quaternion(*[component/other for component in self._components])
+
         return Quaternion(self._h/other, self._i/other, self._j/other, self._k/other)
 
-    # raises a Quaternion to an integer power
+    # Raises a Quaternion to an integer power.
     def __pow__(self, power):
         if type(power) != int:
             raise TypeError("Raising a Quaternion to a non-integer power is not allowed.")
@@ -66,16 +62,15 @@ class Quaternion(VectorSpace):
         if power < 0:
             pass
 
-    # prints the Quaternion components
+    # Prints the Quaternion components.
     def __str__(self):
-        #return "(" + ", ".join(str(component) for component in self._components) + ")"
         return "({0}, {1}, {2}, {3})".format(self._h, self._i, self._j, self._k)
 
-    # creates a conjugate of the Quaternion
+    # Creates a conjugate of the Quaternion.
     def conjugate(self):
         return Quaternion(self.scalar_part(), -self.vector_part())
 
-    # creates a reciprical of the Quaternion such that q*reciprocal(q) == 1
+    # Creates a reciprocal of the Quaternion such that q*reciprocal(q) == 1
     def reciprocal(self):
         length = self.norm()**2
         if length == 0:
@@ -95,14 +90,18 @@ class Quaternion(VectorSpace):
         
         return coefficient*(evenPart + oddPart)
 
+    # Returns the Scalar component of this Quaternion.
     def scalar_part(self):
-        #return self._components[0]
         return self._h
-    
+
+    # Returns the Vector component of this Quaternion.
     def vector_part(self):
-        #return Vector(self._components[1], self._components[2], self._components[3])
         return Vector(self._i, self._j, self._k)
 
+    # Discerns whether the Vector component of this Quaternion is zero.
     def is_scalar(self):
-        #return self._components[1] == 0 and self._components[2] == 0 and self._components[3] == 0
         return self._i == 0 and self._j == 0 and self._k == 0
+
+    # Discerns whether the Scalar component of this Quaternion is zero.
+    def is_vector(self):
+        return self._h == 0
