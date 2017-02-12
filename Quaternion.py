@@ -22,7 +22,7 @@ class Quaternion(VectorSpace):
     # Multiplies a Quaternion by either another Quaternion or an integer/float,
     def __mul__(self, other):
         if type(other) == int or type(other) == float:
-            return Quaternion(other*self._h, other*self._i, other*self._j, other*self._k)
+            return Quaternion(other * self._h, other * self._i, other * self._j, other * self._k)
         elif type(other) == Quaternion:
             return Quaternion(
                 (self._h * other._h) - (self._i * other._i) - (self._j * other._j) - (self._k * other._k),
@@ -32,22 +32,27 @@ class Quaternion(VectorSpace):
 
     # The left-multiplication method __mul__ already handles the anti-commutativity.
     def __rmul__(self, other):
-        return self*other
+        return self * other
 
     # Divides a Quaternion by an integer.
-    # TODO: ensure that 'other' is a valid type
     def __div__(self, other):
+        if type(other) != int and type(other) != float:
+            raise TypeError("Can only divide by integers or floats.")
+
         if other == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
 
-        return Quaternion(self._h/other, self._i/other, self._j/other, self._k/other)
+        return Quaternion(self._h / other, self._i / other, self._j / other, self._k / other)
 
     # TODO: make this leverage the existing __div__ method
     def __truediv__(self, other):
+        if type(other) != int and type(other) != float:
+            raise TypeError("Can only divide by integers or floats.")
+
         if other == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
 
-        return Quaternion(self._h/other, self._i/other, self._j/other, self._k/other)
+        return Quaternion(self._h / other, self._i / other, self._j / other, self._k / other)
 
     # Raises a Quaternion to an integer power.
     def __pow__(self, power):
@@ -57,7 +62,7 @@ class Quaternion(VectorSpace):
         if power == 0:
             return Quaternion(1, 0, 0, 0)
         if power > 0:
-            return self*(self**(power-1))
+            return self * (self**(power - 1))
         # TODO
         if power < 0:
             pass
