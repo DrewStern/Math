@@ -11,8 +11,10 @@ class VectorSpace():
     def __add__(self, other):
         if type(self) != type(other):
             return None
+
         if len(self._components) != len(other._components):
             raise IndexError("Vectors must be of the same length.")
+
         newObj = copy.copy(self)
         newObj._components = [selfVal + otherVal for (selfVal, otherVal) in zip(self._components, other._components)]
         return newObj
@@ -26,8 +28,10 @@ class VectorSpace():
     def __sub__(self, other):
         if type(self) != type(other):
             return None
+
         if len(self._components) != len(other._components):
             raise IndexError("Vectors must be of the same length.")
+
         newObj = copy.copy(self)
         newObj._components = [selfVal - otherVal for (selfVal, otherVal) in zip(self._components, other._components)]
         return newObj
@@ -48,8 +52,10 @@ class VectorSpace():
     def norm(self):
         newObj = copy.copy(self)
         sumOfSquares = 0.0
+
         for component in self._components:
             sumOfSquares += component**2
+
         return math.sqrt(sumOfSquares)
 
     # using the caller, derives a new element of the Vector Space with length 1
@@ -57,7 +63,9 @@ class VectorSpace():
     def normalize(self):
         newObj = copy.copy(self)
         normValue = newObj.norm()
+
         if normValue == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
+
         newObj._components = [component/normValue for component in self._components]
         return newObj

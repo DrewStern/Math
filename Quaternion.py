@@ -68,13 +68,15 @@ class Quaternion(VectorSpace):
 
     # Creates a conjugate of the Quaternion.
     def conjugate(self):
-        return Quaternion(self.scalar_part(), -self.vector_part())
+        return Quaternion(self._h, -self._i, -self._j, -self._k)
 
     # Creates a reciprocal of the Quaternion such that q*reciprocal(q) == 1
     def reciprocal(self):
         length = self.norm()**2
+
         if length == 0:
             raise ZeroDivisionError("Unable to divide by zero.")
+
         return self.conjugate() / length
 
     # TODO: need a test for this

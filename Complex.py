@@ -7,6 +7,7 @@ class Complex(VectorSpace):
     def __init__(self, *components):
         if len(components) != 2:
             raise IndexError("Complex numbers may only have 2 components.")
+
         self._components = list(components)
 
     # multiplies a Complex by either another Complex or an integer/float
@@ -26,11 +27,13 @@ class Complex(VectorSpace):
     def __div__(self, other):
         if other == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
+
         return Complex(*[component/other for component in self._components])
 
     def __truediv__(self, other):
         if other == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
+
         return Complex(*[component/other for component in self._components])
 
     # raises a Complex to an integer power
@@ -59,6 +62,7 @@ class Complex(VectorSpace):
         hypoteneuse = self.norm()**2
         if hypoteneuse == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
+
         return self.conjugate() / hypoteneuse
 
     # TODO: fix this

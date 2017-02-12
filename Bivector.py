@@ -8,7 +8,7 @@ class Bivector(VectorSpace):
 
     # not real implementation!
     def get_area(self):
-        return self.e1 * self.e2 * Math.sin(self.e1 - self.e2)
+        return self.e1 * self.e2 * math.sin(self.e1 - self.e2)
 
     # not real implementation
     def get_orientation(self):

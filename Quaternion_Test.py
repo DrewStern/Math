@@ -86,7 +86,8 @@ class Quaternion_Test(unittest.TestCase):
     # |q| == sqrt(qq*)
     # where q* is the conjugate
     def test_normSquaredIsSelfTimesConjugate(self):
-        self.assertEqual(self.q.norm(), math.sqrt((self.q*self.q.conjugate()).scalar_part()))
+        selfTimesConjugate = self.q*self.q.conjugate()
+        self.assertEqual(self.q.norm(), math.sqrt(selfTimesConjugate))
 
     def test_normalize(self):
         self.assertEqual(self.q.normalize(), self.q / self.qNorm)
@@ -119,6 +120,21 @@ class Quaternion_Test(unittest.TestCase):
         
         self.assertEqual(expQuat2, resultant2)
 
+    def test_isScalar(self):
+        scalarOnly = Quaternion(1, 0, 0, 0)
+        self.assertTrue(scalarOnly.is_scalar())
+
+    def test_IsNotScalar(self):
+        vectorOnly = Quaternion(0, 1, 2, 3)
+        self.assertFalse(vectorOnly.is_scalar())
+
+    def test_isVector(self):
+        vectorOnly = Quaternion(0, 1, 2, 3)
+        self.assertTrue(vectorOnly.is_vector())
+
+    def test_IsNotVector(self):
+        scalarOnly = Quaternion(1, 0, 0, 0)
+        self.assertFalse(scalarOnly.is_vector())
+
     def assertQuaternionsEqual(self, q, p, msg=None):
         return q._h == p._h and q._i == p._i and q._j == p._j and q._k == p._k
-        #return all(qVal == pVal for (qVal, pVal) in zip(q._components, p._components))
