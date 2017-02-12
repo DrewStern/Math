@@ -8,10 +8,8 @@ class Vector(VectorSpace):
     def __init__(self, *components):
         self._components = list(components)
 
-    # multiplies two Vectors via the cross product or a Vector and an integer/float
-    # the cross product is treated as the default multiplication of Vectors
-    # simply because it returns an object of the same type as the inputs
-    # similar to Quaternions and Complexes
+    # Multiplies two Vectors via the cross product or a Vector and an integer/float. The cross product is treated as
+    # the default multiplication of Vectors simply because it returns an object of the same type as the inputs.
     def __mul__(self, other):
         if type(other) == int or type(other) == float:
             return Vector(*[other*component for component in self._components])
@@ -29,14 +27,16 @@ class Vector(VectorSpace):
     def __div__(self, other):
         if other == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
+
         return Vector(*[component/other for component in self._components])
 
     def __truediv__(self, other):
         if other == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
+
         return Vector(*[component/other for component in self._components])
 
-    # prints the Vector components
+    # Prints the Vector components.
     def __str__(self):
         return "(" + ", ".join(str(component) for component in self._components) + ")"
 
@@ -49,8 +49,10 @@ class Vector(VectorSpace):
         componentList = [selfVal*otherVal for selfVal, otherVal in zip(self._components, other._components)]
         return reduce(lambda x, y: x+y, componentList)
 
+    # Determines whether this Vector is orthogonal (perpendicular) to the other Vector.
     def is_orthogonal(self, other):
         return self.dot(other) == 0
 
+    # Determines whether this Vector is collinear (parallel) to the other Vector.
     def is_collinear(self, other):
         return self.dot(other) == 1 or self.dot(other) == -1
