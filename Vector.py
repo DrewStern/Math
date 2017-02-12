@@ -23,14 +23,19 @@ class Vector(VectorSpace):
         return self*other
 
     # divides a Vector by an integer
-    # TODO: ensure that 'other' is a valid type
     def __div__(self, other):
+        if type(other) != int and type(other) != float:
+            raise TypeError("Can only divide by integers or floats.")
+
         if other == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
 
         return Vector(*[component/other for component in self._components])
 
     def __truediv__(self, other):
+        if type(other) != int and type(other) != float:
+            raise TypeError("Can only divide by integers or floats.")
+
         if other == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
 
@@ -40,11 +45,10 @@ class Vector(VectorSpace):
     def __str__(self):
         return "(" + ", ".join(str(component) for component in self._components) + ")"
 
-    # the dot product is treated as a separate method rather than the default
-    # multiplication because it produces a Scalar rather than a Vector
+    # The dot product is not treated as the default multiplication because it produces a Scalar rather than a Vector.
     def dot(self, other):
         if len(self._components) != len(other._components):
-            raise IndexError("Vectors must be of the same length.")
+            raise IndexError("Vectors must be of the same dimension.")
         
         componentList = [selfVal*otherVal for selfVal, otherVal in zip(self._components, other._components)]
         return reduce(lambda x, y: x+y, componentList)
