@@ -46,8 +46,12 @@ class Vector(VectorSpace):
     def __str__(self):
         return "(" + ", ".join(str(component) for component in self._components) + ")"
 
-    # The dot product is not treated as the default multiplication because it produces a Scalar rather than a Vector.
+    # Calculates the Dot (Scalar) product between this Vector and the other.
+    # The Dot product is not treated as the default multiplication because it produces a Scalar rather than a Vector.
     def dot(self, other):
+        if type(other) != Vector:
+            raise TypeError("Dot product may only be calculated between two Vectors.")
+
         if len(self._components) != len(other._components):
             raise IndexError("Vectors must be of the same dimension.")
         
