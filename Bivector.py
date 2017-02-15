@@ -15,7 +15,7 @@ class Bivector(VectorSpace):
         self.e1 = first
         self.e2 = second
 
-    # Area of a Bivector is defined to be |q||p|*sin(theta_qp), where theta_qp is the angle between q and p.
+    # Area of a Bivector is defined to be |q||p|*sin(angle_between(q, p)).
     def area(self):
         return self.e1.norm() * self.e2.norm() * math.sin(self.e1.dot(self.e2))
 

@@ -117,9 +117,13 @@ class Vector_Test(unittest.TestCase):
         self.assertTrue(self.unit_j.is_orthogonal(self.unit_k))
         self.assertTrue(self.unit_k.is_orthogonal(self.unit_i))
 
+    def test_angleBetween_inRadians(self):
+        self.assertEqual(self.unit_j.angle_between(self.unit_j, False), 0)
+        self.assertEqual(self.unit_i.angle_between(self.unit_k, False), math.radians(90))
 
-    # TODO: write unit tests for the angle_between method
-
+    def test_angleBetween_inDegrees(self):
+        self.assertEqual(self.unit_k.angle_between(self.unit_k, True), 0)
+        self.assertEqual(self.unit_j.angle_between(self.unit_i, True), 90)
 
     def test_parallelVectors(self):
         self.assertTrue(self.unit_i.is_parallel(self.unit_i))

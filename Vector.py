@@ -73,8 +73,10 @@ class Vector(VectorSpace):
             (self._components[0]*other._components[1] - self._components[1]*other._components[0]))
 
     # Calculates the angle between this Vector and the other.
-    def angle_between(self, other):
-        return math.acos(self.dot(other) / self.norm() * other.norm())
+    # Result is in Radians by default - use the 'use_degrees' parameter to
+    def angle_between(self, other, use_degrees = False):
+        result = math.acos(self.dot(other) / (self.norm() * other.norm()))
+        return math.degrees(result) if use_degrees else result
 
     # Determines whether this Vector is orthogonal (perpendicular) to the other.
     def is_orthogonal(self, other):
