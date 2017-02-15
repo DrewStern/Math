@@ -112,6 +112,21 @@ class Vector_Test(unittest.TestCase):
     def test_crossProductIsAntiCommutative(self):
         self.assertEqual(self.q.cross(self.p), -(self.p.cross(self.q)))
 
+    # Ensures that the Cross product is only calculated between two Vectors.
+    def test_crossProductOfVectorWithNonvectorRaisesException(self):
+        with self.assertRaises(TypeError):
+            self.q.cross(1)
+
+    # Ensures that the Cross product is only calculated between two Vectors of same dimensionality.
+    def test_crossProductOfUnequalLengthVectorsRaisesException(self):
+        with self.assertRaises(IndexError):
+            self.q.cross(self.long1)
+
+    # Ensures that the Cross product is only calculated between Vectors of dimension 3.
+    def test_crossProductOfNon3dVectorsRaisesException(self):
+        with self.assertRaises(IndexError):
+            self.q.cross(self.long1)
+
     def test_basisElementsAreOrthogonal(self):
         self.assertTrue(self.unit_i.is_orthogonal(self.unit_j))
         self.assertTrue(self.unit_j.is_orthogonal(self.unit_k))
