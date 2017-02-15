@@ -87,7 +87,7 @@ class Vector_Test(unittest.TestCase):
 
     # Ensures that the Dot product is commutative.
     def test_dotProductIsCommutative(self):
-        self.assertEqual(self.q * self.p, self.p * self.q)
+        self.assertEqual(self.q.dot(self.p), self.p.dot(self.q))
 
     # Ensures that the Dot product is only calculated between two Vectors.
     def test_dotProductOfVectorWithNonvectorRaisesException(self):
@@ -107,10 +107,10 @@ class Vector_Test(unittest.TestCase):
         self.assertEqual(self.q.normalize(), self.q / self.qNorm)
 
     def test_crossProduct(self):
-        self.assertEqual(self.q * self.p, Vector(-320, 192, -16))
+        self.assertEqual(self.q.cross(self.p), Vector(-320, 192, -16))
 
     def test_crossProductIsAntiCommutative(self):
-        self.assertEqual(self.q * self.p, -(self.p * self.q))
+        self.assertEqual(self.q.cross(self.p), -(self.p.cross(self.q)))
 
     def test_basisElementsAreOrthogonal(self):
         self.assertTrue(self.unit_i.is_orthogonal(self.unit_j))
@@ -121,12 +121,14 @@ class Vector_Test(unittest.TestCase):
     # TODO: write unit tests for the angle_between method
 
 
-    def test_collinearVectors(self):
-        self.assertTrue(self.unit_i.is_collinear(self.unit_i))
-        self.assertTrue(self.unit_i.is_collinear(-self.unit_i))
+    def test_parallelVectors(self):
+        self.assertTrue(self.unit_i.is_parallel(self.unit_i))
+
+    def test_antiparallelVectors(self):
+        self.assertTrue(self.unit_i.is_antiparallel(-self.unit_i))
 
     def test_scalarTripleProduct(self):
-        crossProduct = self.unit_j * self.unit_k # result is unit_i
+        crossProduct = self.unit_j.cross(self.unit_k) # result is unit_i
         scalarTripleProduct = self.unit_i.dot(crossProduct)
         self.assertEqual(scalarTripleProduct, self.unit_i.norm())
 

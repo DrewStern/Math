@@ -9,21 +9,18 @@ class Vector(VectorSpace):
     def __init__(self, *components):
         self._components = list(components)
 
-    # Multiplies two Vectors via the cross product or a Vector and an integer/float. The cross product is treated as
-    # the default multiplication of Vectors simply because it returns an object of the same type as the inputs.
+    # Multiplies a Vector by a Scalar.
     def __mul__(self, other):
-        if type(other) == int or type(other) == float:
-            return Vector(*[other*component for component in self._components])
-        elif type(other) == Vector and len(self._components) == len(other._components) == 3:
-            return Vector(
-                (self._components[1]*other._components[2] - self._components[2]*other._components[1]),
-                -(self._components[0]*other._components[2] - self._components[2]*other._components[0]),
-                (self._components[0]*other._components[1] - self._components[1]*other._components[0]))
+        if type(other) != int and type(other) != float:
+            raise TypeError("The multiplication operator may only be used for Scalar factors.")
 
+        return Vector(*[other*component for component in self._components])
+
+    # See <__mul__>
     def __rmul__(self, other):
         return self*other
 
-    # divides a Vector by an integer
+    # Divides a Vector by a Scalar.
     def __div__(self, other):
         if type(other) != int and type(other) != float:
             raise TypeError("Can only divide by integers or floats.")
@@ -33,6 +30,7 @@ class Vector(VectorSpace):
 
         return Vector(*[component/other for component in self._components])
 
+    # TODO: make this use __div__
     def __truediv__(self, other):
         if type(other) != int and type(other) != float:
             raise TypeError("Can only divide by integers or floats.")
@@ -46,8 +44,7 @@ class Vector(VectorSpace):
     def __str__(self):
         return "(" + ", ".join(str(component) for component in self._components) + ")"
 
-    # Calculates the Dot (Scalar) product between this Vector and the other.
-    # The Dot product is not treated as the default multiplication because it produces a Scalar rather than a Vector.
+    # Calculates the Dot product between this Vector and the other.
     def dot(self, other):
         if type(other) != Vector:
             raise TypeError("Dot product may only be calculated between two Vectors.")
@@ -58,14 +55,35 @@ class Vector(VectorSpace):
         componentList = [selfVal*otherVal for selfVal, otherVal in zip(self._components, other._components)]
         return reduce(lambda x, y: x+y, componentList)
 
+    # Calculates the Cross product between this Vector and the other.
+    # TODO: expand this to 7 dimensions
+    def cross(self, other):
+        if type(other) != Vector:
+            raise TypeError("Cross product may only be calculated between two Vectors.")
+
+        if len(self._components) != len(other._components):
+            raise IndexError("Vectors must be of the same dimension.")
+
+        if len(self._components) != 3:
+            raise ArithmeticError("Cross product may only be calculated in 3 dimensions.")
+
+        return Vector(
+            (self._components[1]*other._components[2] - self._components[2]*other._components[1]),
+            -(self._components[0]*other._components[2] - self._components[2]*other._components[0]),
+            (self._components[0]*other._components[1] - self._components[1]*other._components[0]))
+
     # Calculates the angle between this Vector and the other.
     def angle_between(self, other):
         return math.acos(self.dot(other) / self.norm() * other.norm())
 
-    # Determines whether this Vector is orthogonal (perpendicular) to the other Vector.
+    # Determines whether this Vector is orthogonal (perpendicular) to the other.
     def is_orthogonal(self, other):
         return self.dot(other) == 0
 
-    # Determines whether this Vector is collinear (parallel) to the other Vector.
-    def is_collinear(self, other):
-        return self.dot(other) == 1 or self.dot(other) == -1
+    # Determines whether this Vector is parallel to the other.
+    def is_parallel(self, other):
+        return self.dot(other) == 1
+
+    # Determines whether this Vector is antiparallel to the other.
+    def is_antiparallel(self, other):
+        return self.dot(other) == -1
