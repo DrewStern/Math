@@ -14,7 +14,6 @@ class Bivector_Test(unittest.TestCase):
 
     def test_nonVectorParameterRaisesTypeError(self):
         with self.assertRaises(TypeError):
-            Bivector(1, 2)
             Bivector(Vector(1, 0, 0), 1)
             Bivector(1, Vector(1, 0, 0))
 

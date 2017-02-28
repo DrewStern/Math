@@ -52,11 +52,11 @@ class Vector(VectorSpace):
         if len(self._components) != len(other._components):
             raise IndexError("Vectors must be of the same dimension.")
         
-        componentList = [selfVal*otherVal for selfVal, otherVal in zip(self._components, other._components)]
+        componentList = [selfVal * otherVal for selfVal, otherVal in zip(self._components, other._components)]
+
         return reduce(lambda x, y: x+y, componentList)
 
     # Calculates the Cross product between this Vector and the other.
-    # TODO: expand this to 7 dimensions
     def cross(self, other):
         if type(other) != Vector:
             raise TypeError("Cross product may only be calculated between two Vectors.")
@@ -64,6 +64,7 @@ class Vector(VectorSpace):
         if len(self._components) != len(other._components):
             raise IndexError("Vectors must be of the same dimension.")
 
+        # TODO: consider expanding this to 7 dimensions
         if len(self._components) != 3:
             raise ArithmeticError("Cross product may only be calculated in 3 dimensions.")
 
@@ -76,6 +77,7 @@ class Vector(VectorSpace):
     # Result is in Radians by default - use the 'use_degrees' parameter to
     def angle_between(self, other, use_degrees = False):
         result = math.acos(self.dot(other) / (self.norm() * other.norm()))
+
         return math.degrees(result) if use_degrees else result
 
     # Determines whether this Vector is orthogonal (perpendicular) to the other.

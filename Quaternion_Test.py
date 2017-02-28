@@ -56,19 +56,19 @@ class Quaternion_Test(unittest.TestCase):
 
     # the basis elements i, j, k have the property ijk = -1
     def test_imaginaryBasisElementsMultiplyToNegativeOne(self):
-        self.assertEqual(self.unit_i*self.unit_j*self.unit_k, Quaternion(-1, 0, 0, 0))
+        self.assertEqual(self.unit_i * self.unit_j * self.unit_k, Quaternion(-1, 0, 0, 0))
 
     # the basis elements i, j, k are cyclic in the sense that if one chooses two neighboring elements in the chain
     # i -> j -> k -> i -> j -> k -> ...
     # and multiplies them in the order they appear in the chain, then the result is the element to the right of the second element
     # the same holds going backwards, but with a negative sign
     def test_imaginaryBasisElementsAreCyclical(self):
-        self.assertEqual(self.unit_i*self.unit_j, self.unit_k)
-        self.assertEqual(self.unit_j*self.unit_k, self.unit_i)
-        self.assertEqual(self.unit_k*self.unit_i, self.unit_j)
-        self.assertEqual(self.unit_j*self.unit_i, -self.unit_k)
-        self.assertEqual(self.unit_k*self.unit_j, -self.unit_i)
-        self.assertEqual(self.unit_i*self.unit_k, -self.unit_j)
+        self.assertEqual(self.unit_i * self.unit_j, self.unit_k)
+        self.assertEqual(self.unit_j * self.unit_k, self.unit_i)
+        self.assertEqual(self.unit_k * self.unit_i, self.unit_j)
+        self.assertEqual(self.unit_j * self.unit_i, -self.unit_k)
+        self.assertEqual(self.unit_k * self.unit_j, -self.unit_i)
+        self.assertEqual(self.unit_i * self.unit_k, -self.unit_j)
 
     def test_nonIntegralPowerRaisesTypeError(self):
         with self.assertRaises(TypeError):
@@ -80,13 +80,13 @@ class Quaternion_Test(unittest.TestCase):
 
     # |qp| == |q||p|
     def test_normIsMultiplicative(self):
-        resultant = self.q*self.p
-        self.assertEqual(self.q.norm()*self.p.norm(), resultant.norm())
+        resultant = self.q * self.p
+        self.assertEqual(self.q.norm() * self.p.norm(), resultant.norm())
 
     # |q| == sqrt(qq*)
     # where q* is the conjugate
     def test_normSquaredIsSelfTimesConjugate(self):
-        selfTimesConjugate = self.q*self.q.conjugate()
+        selfTimesConjugate = self.q * self.q.conjugate()
         self.assertEqual(self.q.norm(), math.sqrt(selfTimesConjugate))
 
     def test_normalize(self):

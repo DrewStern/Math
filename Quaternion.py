@@ -61,8 +61,10 @@ class Quaternion(VectorSpace):
         
         if power == 0:
             return Quaternion(1, 0, 0, 0)
+
         if power > 0:
             return self * (self**(power - 1))
+
         # TODO
         if power < 0:
             pass
