@@ -2,6 +2,7 @@ import math
 from Vector import Vector
 from VectorSpace import VectorSpace
 
+
 # A Quaternion is an element which can be denoted as a*1 + b*i + c*j + d*k for a, b, c, d in the Real numbers.
 # This space is denoted as H (for Hamilton), and has 1, i, j, k as its standard basis elements.
 
@@ -10,7 +11,7 @@ from VectorSpace import VectorSpace
 class Quaternion(VectorSpace):
 
     # Constructor for the Quaternion class.
-    def __init__(self, h = 0.0, i = 0.0, j = 0.0, k = 0.0):
+    def __init__(self, h=0.0, i=0.0, j=0.0, k=0.0):
         self._h = h
         self._i = i
         self._j = j
@@ -58,12 +59,12 @@ class Quaternion(VectorSpace):
     def __pow__(self, power):
         if type(power) != int:
             raise TypeError("Raising a Quaternion to a non-integer power is not allowed.")
-        
+
         if power == 0:
             return Quaternion(1, 0, 0, 0)
 
         if power > 0:
-            return self * (self**(power - 1))
+            return self * (self ** (power - 1))
 
         # TODO
         if power < 0:
@@ -79,7 +80,7 @@ class Quaternion(VectorSpace):
 
     # Creates a reciprocal of the Quaternion such that q*reciprocal(q) == 1
     def reciprocal(self):
-        length = self.norm()**2
+        length = self.norm() ** 2
 
         if length == 0:
             raise ZeroDivisionError("Unable to divide by zero.")
@@ -88,16 +89,16 @@ class Quaternion(VectorSpace):
 
     # TODO: need a test for this
     def exp(self):
-        coefficient = math.e**self.h
+        coefficient = math.e ** self.h
         evenPart = Quaternion(math.cos(self.norm()), 0, 0, 0)
-        oddPart = self.normalize()*math.sin(self.norm())
+        oddPart = self.normalize() * math.sin(self.norm())
 
         print("\n", "coefficient ==", coefficient)
         print("\n", "evenPart == ", evenPart)
         print("\n", "oddPart == ", oddPart)
-        print("\n", "e^q == ", coefficient*(evenPart + oddPart))
-        
-        return coefficient*(evenPart + oddPart)
+        print("\n", "e^q == ", coefficient * (evenPart + oddPart))
+
+        return coefficient * (evenPart + oddPart)
 
     # Returns the Scalar component of this Quaternion.
     def scalar_part(self):

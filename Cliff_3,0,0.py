@@ -1,14 +1,11 @@
-import math
-from Vector import Vector
 from Bivector import Bivector
 from Pseudoscalar import Pseudoscalar
+from Vector import Vector
+
 
 # Algebra of Physical Space
 @staticmethod
 class APS(Vector):
-
-
-
     class Multivector():
 
         # these parameters are the coefficients
@@ -29,6 +26,6 @@ class APS(Vector):
 
         def __str__(self):
             print("scalar: ", self._scalar, "\n",
-              "vector: ", self._vector, "\n",
-              "bivector: ", self._bivector, "\n",
-              "pseudoscalar: ", self._pseudoscalar)
+                  "vector: ", self._vector, "\n",
+                  "bivector: ", self._bivector, "\n",
+                  "pseudoscalar: ", self._pseudoscalar)

@@ -2,6 +2,7 @@ import unittest
 from Vector import Vector
 from Bivector import Bivector
 
+
 class Bivector_Test(unittest.TestCase):
 
     def setUp(self):

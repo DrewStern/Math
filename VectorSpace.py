@@ -2,6 +2,7 @@ from abc import ABCMeta, abstractmethod
 import copy
 import math
 
+
 # abstract class representing a Vector Space with an unknown number of dimensions
 class VectorSpace():
     __metaclass__ = ABCMeta
@@ -54,7 +55,7 @@ class VectorSpace():
         sumOfSquares = 0.0
 
         for component in self._components:
-            sumOfSquares += component**2
+            sumOfSquares += component ** 2
 
         return math.sqrt(sumOfSquares)
 
@@ -67,5 +68,5 @@ class VectorSpace():
         if normValue == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
 
-        newObj._components = [component/normValue for component in self._components]
+        newObj._components = [component / normValue for component in self._components]
         return newObj

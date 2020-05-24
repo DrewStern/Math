@@ -2,6 +2,7 @@ import unittest
 import math
 from Vector import Vector
 
+
 class Vector_Test(unittest.TestCase):
 
     def setUp(self):
@@ -16,8 +17,8 @@ class Vector_Test(unittest.TestCase):
         self.pNorm = math.sqrt(84)
 
         # 10-dimensional Vectors
-        self.long1 = Vector(1,2,3,4,5,6,7,8,9)
-        self.long2 = Vector(9,8,7,6,5,4,3,2,1)
+        self.long1 = Vector(1, 2, 3, 4, 5, 6, 7, 8, 9)
+        self.long2 = Vector(9, 8, 7, 6, 5, 4, 3, 2, 1)
 
         # standard Euclidean basis elements
         self.unit_i = Vector(1, 0, 0)
@@ -29,8 +30,8 @@ class Vector_Test(unittest.TestCase):
         self.assertEqual(self.q + self.p, Vector(3, 14, 108))
         self.assertEqual(self.p + self.q, Vector(3, 14, 108))
 
-        self.assertEqual(self.long1 + self.long2, Vector(10,10,10,10,10,10,10,10,10))
-        self.assertEqual(self.long2 + self.long1, Vector(10,10,10,10,10,10,10,10,10))
+        self.assertEqual(self.long1 + self.long2, Vector(10, 10, 10, 10, 10, 10, 10, 10, 10))
+        self.assertEqual(self.long2 + self.long1, Vector(10, 10, 10, 10, 10, 10, 10, 10, 10))
 
     # Ensures that we can't add Scalars to Vectors.
     def test_additionOfVectorWithNonvectorRaisesException(self):
@@ -147,7 +148,7 @@ class Vector_Test(unittest.TestCase):
         self.assertTrue(self.unit_i.is_antiparallel(-self.unit_i))
 
     def test_scalarTripleProduct(self):
-        crossProduct = self.unit_j.cross(self.unit_k) # result is unit_i
+        crossProduct = self.unit_j.cross(self.unit_k)  # result is unit_i
         scalarTripleProduct = self.unit_i.dot(crossProduct)
         self.assertEqual(scalarTripleProduct, self.unit_i.norm())
 

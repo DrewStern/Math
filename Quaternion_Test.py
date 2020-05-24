@@ -2,14 +2,15 @@ import unittest
 import math
 from Quaternion import Quaternion
 
+
 class Quaternion_Test(unittest.TestCase):
 
     def setUp(self):
         self.addTypeEqualityFunc(Quaternion, 'assertQuaternionsEqual')
-        
+
         self.q = Quaternion(1, 10, 100, 1000)
         self.qNorm = math.sqrt(1010101)
-        
+
         self.p = Quaternion(2, 4, 8, 16)
         self.pNorm = math.sqrt(340)
 
@@ -50,9 +51,9 @@ class Quaternion_Test(unittest.TestCase):
     # the basis elements i, j, k have the property i^2 = j^2 = k^2 = -1
     def test_imaginaryBasisElementsSquareToNegativeOne(self):
         negativeOneScalar = Quaternion(-1, 0, 0, 0)
-        self.assertEqual(self.unit_i**2, negativeOneScalar)
-        self.assertEqual(self.unit_j**2, negativeOneScalar)
-        self.assertEqual(self.unit_k**2, negativeOneScalar)
+        self.assertEqual(self.unit_i ** 2, negativeOneScalar)
+        self.assertEqual(self.unit_j ** 2, negativeOneScalar)
+        self.assertEqual(self.unit_k ** 2, negativeOneScalar)
 
     # the basis elements i, j, k have the property ijk = -1
     def test_imaginaryBasisElementsMultiplyToNegativeOne(self):
@@ -72,8 +73,8 @@ class Quaternion_Test(unittest.TestCase):
 
     def test_nonIntegralPowerRaisesTypeError(self):
         with self.assertRaises(TypeError):
-            self.q**4.5
-        
+            self.q ** 4.5
+
     def test_norm(self):
         self.assertEqual(self.q.norm(), self.qNorm)
         self.assertEqual(self.p.norm(), self.pNorm)
@@ -100,24 +101,24 @@ class Quaternion_Test(unittest.TestCase):
         self.assertEqual(self.q, self.q.conjugate().conjugate())
 
     def test_reciprocal(self):
-        self.assertEqual(self.q.reciprocal(), self.q / self.qNorm**2)
+        self.assertEqual(self.q.reciprocal(), self.q / self.qNorm ** 2)
 
     @unittest.skip("this doesn't seem to be working correctly")
     def test_exp(self):
         expQuat1 = Quaternion(math.pi, math.pi, math.pi, math.pi).exp()
-        resultant1 = Quaternion(100000000*math.e**math.pi, 0, 0, 0)
+        resultant1 = Quaternion(100000000 * math.e ** math.pi, 0, 0, 0)
 
         print("\nexpQuat1: ", expQuat1)
         print("\nresultant1: ", resultant1)
-        
+
         self.assertEqual(expQuat1, resultant1)
 
-        expQuat2 = Quaternion(math.pi/2, math.pi/2, math.pi/2, math.pi/2).exp()
-        resultant2 = Quaternion(100000000*math.e**(math.pi/2), 0, 0, 0)
+        expQuat2 = Quaternion(math.pi / 2, math.pi / 2, math.pi / 2, math.pi / 2).exp()
+        resultant2 = Quaternion(100000000 * math.e ** (math.pi / 2), 0, 0, 0)
 
         print("\nexpQuat2: ", expQuat2)
         print("\nresultant2: ", resultant2)
-        
+
         self.assertEqual(expQuat2, resultant2)
 
     def test_isScalar(self):

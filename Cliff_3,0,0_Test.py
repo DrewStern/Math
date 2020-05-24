@@ -1,7 +1,7 @@
 import unittest
-import math
-from APS import APS
+
 from Multivector import Multivector
+
 
 class APS_Test(unittest.TestCase):
 

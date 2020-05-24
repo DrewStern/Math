@@ -1,7 +1,7 @@
 import math
-from VectorSpace import VectorSpace
-from itertools import *
 from functools import *
+from VectorSpace import VectorSpace
+
 
 class Vector(VectorSpace):
 
@@ -14,11 +14,11 @@ class Vector(VectorSpace):
         if type(other) != int and type(other) != float:
             raise TypeError("The multiplication operator may only be used for Scalar factors.")
 
-        return Vector(*[other*component for component in self._components])
+        return Vector(*[other * component for component in self._components])
 
     # See <__mul__>
     def __rmul__(self, other):
-        return self*other
+        return self * other
 
     # Divides a Vector by a Scalar.
     def __div__(self, other):
@@ -28,7 +28,7 @@ class Vector(VectorSpace):
         if other == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
 
-        return Vector(*[component/other for component in self._components])
+        return Vector(*[component / other for component in self._components])
 
     # TODO: make this use __div__
     def __truediv__(self, other):
@@ -38,7 +38,7 @@ class Vector(VectorSpace):
         if other == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
 
-        return Vector(*[component/other for component in self._components])
+        return Vector(*[component / other for component in self._components])
 
     # Prints the Vector components.
     def __str__(self):
@@ -51,10 +51,10 @@ class Vector(VectorSpace):
 
         if len(self._components) != len(other._components):
             raise IndexError("Vectors must be of the same dimension.")
-        
+
         componentList = [selfVal * otherVal for selfVal, otherVal in zip(self._components, other._components)]
 
-        return reduce(lambda x, y: x+y, componentList)
+        return reduce(lambda x, y: x + y, componentList)
 
     # Calculates the Cross product between this Vector and the other.
     def cross(self, other):
@@ -69,13 +69,13 @@ class Vector(VectorSpace):
             raise ArithmeticError("Cross product may only be calculated in 3 dimensions.")
 
         return Vector(
-            (self._components[1]*other._components[2] - self._components[2]*other._components[1]),
-            -(self._components[0]*other._components[2] - self._components[2]*other._components[0]),
-            (self._components[0]*other._components[1] - self._components[1]*other._components[0]))
+            (self._components[1] * other._components[2] - self._components[2] * other._components[1]),
+            -(self._components[0] * other._components[2] - self._components[2] * other._components[0]),
+            (self._components[0] * other._components[1] - self._components[1] * other._components[0]))
 
     # Calculates the angle between this Vector and the other.
     # Result is in Radians by default - use the 'use_degrees' parameter to
-    def angle_between(self, other, use_degrees = False):
+    def angle_between(self, other, use_degrees=False):
         result = math.acos(self.dot(other) / (self.norm() * other.norm()))
 
         return math.degrees(result) if use_degrees else result

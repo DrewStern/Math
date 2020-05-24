@@ -2,15 +2,16 @@ import unittest
 import math
 from Complex import Complex
 
+
 class Complex_Test(unittest.TestCase):
 
     def setUp(self):
         self.addTypeEqualityFunc(Complex, 'assertComplexEqual')
-        
+
         self.q = Complex(1, 10)
         self.qNorm = math.sqrt(101)
-        self.qInverse = Complex(1/101, -10/101)
-        
+        self.qInverse = Complex(1 / 101, -10 / 101)
+
         self.p = Complex(2, 4)
         self.pNorm = math.sqrt(20)
         self.pInverse = Complex(.1, -.2)
@@ -28,7 +29,7 @@ class Complex_Test(unittest.TestCase):
         self.assertEqual(self.q - self.p, Complex(-1, 6))
         self.assertEqual(self.p - self.q, -Complex(-1, 6))
 
-    def test_scalarMultiplication(self):     
+    def test_scalarMultiplication(self):
         self.assertEqual(3.3 * self.q, Complex(3.3, 33.0))
 
     # scalar*Complex == Complex*scalar
@@ -49,17 +50,17 @@ class Complex_Test(unittest.TestCase):
         self.assertEqual(self.q * self.p, self.p * self.q)
 
     def test_power(self):
-        print("\n", self.p**3, " ?= ", Complex(-88, -16))
-        self.assertEqual(self.p**3, Complex(-88, -16))
+        print("\n", self.p ** 3, " ?= ", Complex(-88, -16))
+        self.assertEqual(self.p ** 3, Complex(-88, -16))
 
     # the basis element i has the property i^2 = -1
     def test_imaginaryBasisElementSquaresToNegativeOne(self):
-        print("\n", self.unit_i**2, " ?= ", Complex(-1, 0)) 
-        self.assertEqual(self.unit_i**2, Complex(-1, 0))
+        print("\n", self.unit_i ** 2, " ?= ", Complex(-1, 0))
+        self.assertEqual(self.unit_i ** 2, Complex(-1, 0))
 
     def test_nonIntegralPowerRaisesTypeError(self):
         with self.assertRaises(TypeError):
-            self.q**4.5
+            self.q ** 4.5
 
     def test_norm(self):
         self.assertEqual(self.q.norm(), self.qNorm)
@@ -67,17 +68,17 @@ class Complex_Test(unittest.TestCase):
 
     # |qp| == |q||p|
     def test_normIsMultiplicative(self):
-        self.assertEqual(self.q.norm()*self.p.norm(), self.qNorm*self.pNorm)
+        self.assertEqual(self.q.norm() * self.p.norm(), self.qNorm * self.pNorm)
 
     # |q| == sqrt(qq*)
     # where q* is the conjugate
     @unittest.skip("not ready")
     def test_normSquaredIsSelfTimesConjugate(self):
-        print("\n", self.q.norm(), " ?= ", math.sqrt((self.q*self.q.conjugate()).scalar_part())) 
-        self.assertEqual(self.q.norm(), math.sqrt((self.q*self.q.conjugate()).scalar_part()))
+        print("\n", self.q.norm(), " ?= ", math.sqrt((self.q * self.q.conjugate()).scalar_part()))
+        self.assertEqual(self.q.norm(), math.sqrt((self.q * self.q.conjugate()).scalar_part()))
 
     def test_normalize(self):
-        self.assertEqual(self.q.normalize(), self.q/self.qNorm)
+        self.assertEqual(self.q.normalize(), self.q / self.qNorm)
 
     def test_conjugate(self):
         self.assertEqual(self.q.conjugate(), Complex(1, -10))
@@ -97,19 +98,19 @@ class Complex_Test(unittest.TestCase):
     @unittest.skip("this doesn't seem to be working correctly")
     def test_exp(self):
         expQuat1 = Complex(math.pi, math.pi).exp()
-        resultant1 = Complex(100000000*math.e**math.pi, 0)
+        resultant1 = Complex(100000000 * math.e ** math.pi, 0)
 
         print("\nexpQuat1: ", expQuat1)
         print("\nresultant1: ", resultant1)
-        
+
         self.assertEqual(expQuat1, resultant1)
 
-        expQuat2 = Complex(math.pi/2, math.pi/2).exp()
-        resultant2 = Complex(100000000*math.e**(math.pi/2), 0)
+        expQuat2 = Complex(math.pi / 2, math.pi / 2).exp()
+        resultant2 = Complex(100000000 * math.e ** (math.pi / 2), 0)
 
         print("\nexpQuat2: ", expQuat2)
         print("\nresultant2: ", resultant2)
-        
+
         self.assertEqual(expQuat2, resultant2)
 
     def assertComplexEqual(self, q, p, msg=None):

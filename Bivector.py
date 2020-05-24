@@ -2,6 +2,7 @@ import math
 from Vector import Vector
 from VectorSpace import VectorSpace
 
+
 # TODO: this will probably be phased out in favor of a general Multivector class -
 # don't want to create classes which enumerate the number of Vector parameters that it takes
 # that is, we don't want to bother creating Trivector, Quadvector, etc classes
