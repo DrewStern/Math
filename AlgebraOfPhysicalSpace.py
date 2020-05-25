@@ -5,7 +5,7 @@ from Vector import Vector
 
 # Algebra of Physical Space
 @staticmethod
-class APS(Vector):
+class AlgebraOfPhysicalSpace(Vector):
     class Multivector():
 
         # these parameters are the coefficients
