@@ -1,4 +1,6 @@
 import math
+
+from src.Tools import Tools
 from src.Vector import Vector
 from src.VectorSpace import VectorSpace
 
@@ -22,7 +24,7 @@ class Quaternion(VectorSpace):
 
     # Multiplies a Quaternion by either another Quaternion or an integer/float,
     def __mul__(self, other):
-        if type(other) == int or type(other) == float:
+        if Tools.is_numeric_type(other):
             return Quaternion(other * self._h, other * self._i, other * self._j, other * self._k)
         elif type(other) == Quaternion:
             return Quaternion(
@@ -37,35 +39,24 @@ class Quaternion(VectorSpace):
 
     # Divides a Quaternion by an integer.
     def __div__(self, other):
-        if type(other) != int and type(other) != float:
+        if Tools.is_not_numeric_type(other):
             raise TypeError("Can only divide by integers or floats.")
-
         if other == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
-
         return Quaternion(self._h / other, self._i / other, self._j / other, self._k / other)
 
     # TODO: make this leverage the existing __div__ method
     def __truediv__(self, other):
-        if type(other) != int and type(other) != float:
-            raise TypeError("Can only divide by integers or floats.")
-
-        if other == 0:
-            raise ZeroDivisionError("Cannot divide by zero.")
-
-        return Quaternion(self._h / other, self._i / other, self._j / other, self._k / other)
+        return self.__div__(other)
 
     # Raises a Quaternion to an integer power.
     def __pow__(self, power):
         if type(power) != int:
             raise TypeError("Raising a Quaternion to a non-integer power is not allowed.")
-
         if power == 0:
             return Quaternion(1, 0, 0, 0)
-
         if power > 0:
             return self * (self ** (power - 1))
-
         # TODO
         if power < 0:
             pass
@@ -81,10 +72,8 @@ class Quaternion(VectorSpace):
     # Creates a reciprocal of the Quaternion such that q*reciprocal(q) == 1
     def reciprocal(self):
         length = self.norm() ** 2
-
         if length == 0:
             raise ZeroDivisionError("Unable to divide by zero.")
-
         return self.conjugate() / length
 
     # TODO: need a test for this

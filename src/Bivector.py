@@ -3,7 +3,7 @@ from src.Vector import Vector
 from src.VectorSpace import VectorSpace
 
 
-# TODO: this will probably be phased out in favor of a general Multivector class -
+# TODO: this will probably be phased out in favor of a general Multivector.py class -
 # don't want to create classes which enumerate the number of Vector parameters that it takes
 # that is, we don't want to bother creating Trivector, Quadvector, etc classes
 # all of the necessary forms should be derived from the dimension of the underlying VectorSpace

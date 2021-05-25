@@ -1,4 +1,6 @@
 import math
+
+from src.Tools import Tools
 from src.VectorSpace import VectorSpace
 
 
@@ -8,12 +10,11 @@ class Complex(VectorSpace):
     def __init__(self, *components):
         if len(components) != 2:
             raise IndexError("Complex numbers may only have 2 components.")
-
         self._components = list(components)
 
     # multiplies a Complex by either another Complex or an integer/float
     def __mul__(self, other):
-        if type(other) == int or type(other) == float:
+        if Tools.is_numeric_type(other):
             return Complex(*[other * component for component in self._components])
         elif type(other) == Complex:
             return Complex(self.real_part() * other.real_part() - self.imaginary_part() * other.imaginary_part(),
@@ -26,22 +27,19 @@ class Complex(VectorSpace):
     # TODO: ensure that 'other' is a valid type
     # TODO: need to be able to divide by Complexes
     def __div__(self, other):
+        if Tools.is_not_numeric_type(other):
+            raise TypeError("Can only divide by integers or floats.")
         if other == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
-
         return Complex(*[component / other for component in self._components])
 
     def __truediv__(self, other):
-        if other == 0:
-            raise ZeroDivisionError("Cannot divide by zero.")
-
-        return Complex(*[component / other for component in self._components])
+        return self.__div__(other)
 
     # raises a Complex to an integer power
     def __pow__(self, power):
         if type(power) != int:
             raise TypeError("Raising a Complex to a non-integer power is not allowed.")
-
         if power == 0:
             return Complex(1, 0)
         if power > 0:

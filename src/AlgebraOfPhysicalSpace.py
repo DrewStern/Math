@@ -1,22 +1,25 @@
-from src.Bivector import Bivector
-from src.Pseudoscalar import Pseudoscalar
-from src.Vector import Vector
+class VectorSpaceService:
+    def __init__(self):
+        pass
 
+class InnerProductService:
+    def __init__(self, vector_space_service: VectorSpaceService):
+        self.vector_space_service = vector_space_service
 
-# Algebra of Physical Space
-@staticmethod
-class AlgebraOfPhysicalSpace(Vector):
-    class Multivector():
+class OuterProductService:
+    def __init__(self):
+        pass
 
-        # these parameters are the coefficients
-        def __init__(self, scalar, vector: Vector, bivector: Bivector, pseudoscalar: Pseudoscalar):
-            self._scalar = scalar
-            self._vector = vector
-            self._bivector = bivector
-            self._pseudoscalar = pseudoscalar
+class GeometricProductService:
+    def __init__(self,
+        inner_product_space_service: InnerProductService,
+        outer_product_space_service: OuterProductService,
+    ):
+        self.inner_product_space_service = inner_product_space_service
+        self.outer_product_space_service = outer_product_space_service
 
-        def __str__(self):
-            print("scalar: ", self._scalar, "\n",
-                  "vector: ", self._vector, "\n",
-                  "bivector: ", self._bivector, "\n",
-                  "pseudoscalar: ", self._pseudoscalar)
+class AlgebraOfPhysicalSpace:
+    def __init__(self,
+        geometric_product_space_service: GeometricProductService,
+    ):
+        pass
