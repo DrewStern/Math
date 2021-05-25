@@ -1,6 +1,6 @@
 import math
-from Vector import Vector
-from VectorSpace import VectorSpace
+from src.Vector import Vector
+from src.VectorSpace import VectorSpace
 
 
 # TODO: this will probably be phased out in favor of a general Multivector class -

@@ -1,6 +1,6 @@
 import math
 from functools import *
-from VectorSpace import VectorSpace
+from src.VectorSpace import VectorSpace
 
 
 class Vector(VectorSpace):
@@ -52,9 +52,8 @@ class Vector(VectorSpace):
         if self.is_not_same_length(other):
             raise IndexError("Vectors must be of the same dimension.")
 
-        componentList = [selfVal * otherVal for selfVal, otherVal in zip(self._components, other._components)]
-
-        return reduce(lambda x, y: x + y, componentList)
+        components = [selfVal * otherVal for selfVal, otherVal in zip(self._components, other._components)]
+        return reduce(lambda x, y: x + y, components)
 
     # Calculates the Cross product between this Vector and the other.
     def cross(self, other):

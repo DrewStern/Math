@@ -1,6 +1,6 @@
 import unittest
 import math
-from Complex import Complex
+from src.Complex import Complex
 
 
 class Complex_Test(unittest.TestCase):

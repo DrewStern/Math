@@ -1,5 +1,5 @@
 import math
-from VectorSpace import VectorSpace
+from src.VectorSpace import VectorSpace
 
 
 class Complex(VectorSpace):

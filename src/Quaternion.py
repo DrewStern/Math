@@ -1,6 +1,6 @@
 import math
-from Vector import Vector
-from VectorSpace import VectorSpace
+from src.Vector import Vector
+from src.VectorSpace import VectorSpace
 
 
 # A Quaternion is an element which can be denoted as a*1 + b*i + c*j + d*k for a, b, c, d in the Real numbers.

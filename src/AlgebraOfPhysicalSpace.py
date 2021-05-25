@@ -1,6 +1,6 @@
-from Bivector import Bivector
-from Pseudoscalar import Pseudoscalar
-from Vector import Vector
+from src.Bivector import Bivector
+from src.Pseudoscalar import Pseudoscalar
+from src.Vector import Vector
 
 
 # Algebra of Physical Space
