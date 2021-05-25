@@ -9,16 +9,7 @@ class AlgebraOfPhysicalSpace(Vector):
     class Multivector():
 
         # these parameters are the coefficients
-        def __init__(self, scalar, vector, bivector, pseudoscalar):
-            if type(vector) != Vector:
-                raise TypeError("Vector parameter must be of Vector type.")
-
-            if type(bivector) != Bivector:
-                raise TypeError("Bivector parameter must be of Bivector type.")
-
-            if type(pseudoscalar) != Pseudoscalar:
-                raise TypeError("Pseudoscalar parameter must be of Pseudoscalar type.")
-
+        def __init__(self, scalar, vector: Vector, bivector: Bivector, pseudoscalar: Pseudoscalar):
             self._scalar = scalar
             self._vector = vector
             self._bivector = bivector

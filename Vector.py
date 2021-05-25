@@ -11,7 +11,7 @@ class Vector(VectorSpace):
 
     # Multiplies a Vector by a Scalar.
     def __mul__(self, other):
-        if type(other) != int and type(other) != float:
+        if self.is_scalar_not_correct_type(other):
             raise TypeError("The multiplication operator may only be used for Scalar factors.")
 
         return Vector(*[other * component for component in self._components])
@@ -22,7 +22,7 @@ class Vector(VectorSpace):
 
     # Divides a Vector by a Scalar.
     def __div__(self, other):
-        if type(other) != int and type(other) != float:
+        if self.is_scalar_not_correct_type(other):
             raise TypeError("Can only divide by integers or floats.")
 
         if other == 0:
@@ -32,7 +32,7 @@ class Vector(VectorSpace):
 
     # TODO: make this use __div__
     def __truediv__(self, other):
-        if type(other) != int and type(other) != float:
+        if self.is_scalar_not_correct_type(other):
             raise TypeError("Can only divide by integers or floats.")
 
         if other == 0:
@@ -49,7 +49,7 @@ class Vector(VectorSpace):
         if type(other) != Vector:
             raise TypeError("Dot product may only be calculated between two Vectors.")
 
-        if len(self._components) != len(other._components):
+        if self.is_not_same_length(other):
             raise IndexError("Vectors must be of the same dimension.")
 
         componentList = [selfVal * otherVal for selfVal, otherVal in zip(self._components, other._components)]
@@ -61,7 +61,7 @@ class Vector(VectorSpace):
         if type(other) != Vector:
             raise TypeError("Cross product may only be calculated between two Vectors.")
 
-        if len(self._components) != len(other._components):
+        if self.is_not_same_length(other):
             raise IndexError("Vectors must be of the same dimension.")
 
         # TODO: consider expanding this to 7 dimensions
@@ -77,7 +77,6 @@ class Vector(VectorSpace):
     # Result is in Radians by default - use the 'use_degrees' parameter to
     def angle_between(self, other, use_degrees=False):
         result = math.acos(self.dot(other) / (self.norm() * other.norm()))
-
         return math.degrees(result) if use_degrees else result
 
     # Determines whether this Vector is orthogonal (perpendicular) to the other.
@@ -91,3 +90,15 @@ class Vector(VectorSpace):
     # Determines whether this Vector is antiparallel to the other.
     def is_antiparallel(self, other):
         return self.dot(other) == -1
+
+    def is_same_length(self, other):
+        return len(self._components) == len(other._components)
+
+    def is_not_same_length(self, other):
+        return not self.is_same_length(other)
+
+    def is_scalar_correct_type(self, scalar):
+        return type(scalar) == int or type(scalar) == float
+
+    def is_scalar_not_correct_type(self, scalar):
+        return not self.is_scalar_correct_type(scalar)
