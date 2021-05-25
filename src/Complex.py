@@ -16,7 +16,7 @@ class Complex(VectorSpace):
     def __mul__(self, other):
         if Tools.is_numeric_type(other):
             return Complex(*[other * component for component in self._components])
-        elif type(other) == Complex:
+        elif Tools.are_same_type(self, other):
             return Complex(self.real_part() * other.real_part() - self.imaginary_part() * other.imaginary_part(),
                            self.real_part() * other.imaginary_part() + self.imaginary_part() * other.real_part())
 

@@ -13,7 +13,7 @@ class VectorSpace():
     # override the + operator for elements of the Vector Space
     @abstractmethod
     def __add__(self, other):
-        if type(self) != type(other):
+        if Tools.are_not_same_type(self, other):
             raise TypeError("Elements must be of the same type.")
         if Tools.are_not_same_length(self._components, other._components):
             raise IndexError("Elements must be of the same dimension.")
@@ -28,7 +28,7 @@ class VectorSpace():
     # override the - operator for elements of the Vector Space
     @abstractmethod
     def __sub__(self, other):
-        if type(self) != type(other):
+        if Tools.are_not_same_type(self, other):
             raise TypeError("Elements must be of the same type.")
         if Tools.are_not_same_length(self._components, other._components):
             raise IndexError("Elements must be of the same dimension.")

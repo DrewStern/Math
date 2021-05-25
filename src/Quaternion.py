@@ -26,7 +26,7 @@ class Quaternion(VectorSpace):
     def __mul__(self, other):
         if Tools.is_numeric_type(other):
             return Quaternion(other * self._h, other * self._i, other * self._j, other * self._k)
-        elif type(other) == Quaternion:
+        elif Tools.are_same_type(self, other):
             return Quaternion(
                 (self._h * other._h) - (self._i * other._i) - (self._j * other._j) - (self._k * other._k),
                 (self._h * other._i) + (self._i * other._h) + (self._j * other._k) - (self._k * other._j),

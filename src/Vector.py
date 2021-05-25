@@ -44,7 +44,7 @@ class Vector(VectorSpace):
 
     # Calculates the Dot product between this Vector and the other.
     def dot(self, other):
-        if type(other) != Vector:
+        if Tools.are_not_same_type(self, other):
             raise TypeError("Dot product may only be calculated between two Vectors.")
         if Tools.are_not_same_length(self, other):
             raise IndexError("Vectors must be of the same dimension.")
@@ -53,7 +53,7 @@ class Vector(VectorSpace):
 
     # Calculates the Cross product between this Vector and the other.
     def cross(self, other):
-        if type(other) != Vector:
+        if Tools.are_not_same_type(self, other):
             raise TypeError("Cross product may only be calculated between two Vectors.")
         if Tools.are_not_same_length(self, other):
             raise IndexError("Vectors must be of the same dimension.")
