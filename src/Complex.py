@@ -24,7 +24,6 @@ class Complex(VectorSpace):
         return self * other
 
     # divides a Complex by an integer
-    # TODO: ensure that 'other' is a valid type
     # TODO: need to be able to divide by Complexes
     def __div__(self, other):
         if Tools.is_not_numeric_type(other):
@@ -61,7 +60,6 @@ class Complex(VectorSpace):
         hypoteneuse = self.norm() ** 2
         if hypoteneuse == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
-
         return self.conjugate() / hypoteneuse
 
     # TODO: fix this

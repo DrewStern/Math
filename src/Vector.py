@@ -7,8 +7,9 @@ from src.VectorSpace import VectorSpace
 
 class Vector(VectorSpace):
 
-    # TODO: validate that all components are of int/float type
     def __init__(self, *components):
+        if Tools.is_not_numeric_type(components):
+            raise TypeError("Parameter must be of numeric type")
         self._components = list(components)
 
     # Multiplies a Vector by a Scalar.
@@ -45,7 +46,7 @@ class Vector(VectorSpace):
     def dot(self, other):
         if type(other) != Vector:
             raise TypeError("Dot product may only be calculated between two Vectors.")
-        if Tools.is_not_same_length(other):
+        if Tools.are_not_same_length(self, other):
             raise IndexError("Vectors must be of the same dimension.")
         components = [selfVal * otherVal for selfVal, otherVal in zip(self._components, other._components)]
         return reduce(lambda x, y: x + y, components)
@@ -54,7 +55,7 @@ class Vector(VectorSpace):
     def cross(self, other):
         if type(other) != Vector:
             raise TypeError("Cross product may only be calculated between two Vectors.")
-        if Tools.is_not_same_length(other):
+        if Tools.are_not_same_length(self, other):
             raise IndexError("Vectors must be of the same dimension.")
         # TODO: consider expanding this to 7 dimensions
         if len(self._components) != 3:

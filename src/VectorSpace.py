@@ -4,6 +4,9 @@ import math
 
 
 # abstract class representing a Vector Space with an unknown number of dimensions
+from src.Tools import Tools
+
+
 class VectorSpace():
     __metaclass__ = ABCMeta
 
@@ -12,10 +15,8 @@ class VectorSpace():
     def __add__(self, other):
         if type(self) != type(other):
             raise TypeError("Elements must be of the same type.")
-
-        if len(self._components) != len(other._components):
+        if Tools.are_not_same_length(self._components, other._components):
             raise IndexError("Elements must be of the same dimension.")
-
         newObj = copy.copy(self)
         newObj._components = [selfVal + otherVal for (selfVal, otherVal) in zip(self._components, other._components)]
         return newObj
@@ -29,10 +30,8 @@ class VectorSpace():
     def __sub__(self, other):
         if type(self) != type(other):
             raise TypeError("Elements must be of the same type.")
-
-        if len(self._components) != len(other._components):
+        if Tools.are_not_same_length(self._components, other._components):
             raise IndexError("Elements must be of the same dimension.")
-
         newObj = copy.copy(self)
         newObj._components = [selfVal - otherVal for (selfVal, otherVal) in zip(self._components, other._components)]
         return newObj
@@ -51,12 +50,9 @@ class VectorSpace():
     # calculates the magnitude of the caller
     @abstractmethod
     def norm(self):
-        newObj = copy.copy(self)
         sumOfSquares = 0.0
-
         for component in self._components:
             sumOfSquares += component ** 2
-
         return math.sqrt(sumOfSquares)
 
     # using the caller, derives a new element of the Vector Space with magnitude 1
@@ -64,9 +60,7 @@ class VectorSpace():
     def normalize(self):
         newObj = copy.copy(self)
         normValue = newObj.norm()
-
         if normValue == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
-
         newObj._components = [component / normValue for component in self._components]
         return newObj

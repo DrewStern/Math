@@ -12,7 +12,6 @@ class Bivector(VectorSpace):
     def __init__(self, first, second):
         if type(first) != Vector or type(second) != Vector:
             raise TypeError("Bivectors can only be constructed from Vectors")
-
         self._e1 = first
         self._e2 = second
 
