@@ -45,7 +45,6 @@ class Quaternion(VectorSpace):
             raise ZeroDivisionError("Cannot divide by zero.")
         return Quaternion(self._h / other, self._i / other, self._j / other, self._k / other)
 
-    # TODO: make this leverage the existing __div__ method
     def __truediv__(self, other):
         return self.__div__(other)
 

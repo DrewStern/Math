@@ -87,8 +87,9 @@ class Quaternion_Test(unittest.TestCase):
     # |q| == sqrt(qq*)
     # where q* is the conjugate
     def test_normSquaredIsSelfTimesConjugate(self):
-        selfTimesConjugate = self.q * self.q.conjugate()
-        self.assertEqual(self.q.norm(), math.sqrt(selfTimesConjugate))
+        self_times_conjugate = self.q * self.q.conjugate()
+        self.assertTrue(self_times_conjugate.is_scalar())
+        self.assertEqual(self.q.norm(), math.sqrt(self_times_conjugate.scalar_part()))
 
     def test_normalize(self):
         self.assertEqual(self.q.normalize(), self.q / self.qNorm)

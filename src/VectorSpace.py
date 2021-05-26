@@ -7,7 +7,7 @@ import math
 from src.Tools import Tools
 
 
-class VectorSpace():
+class VectorSpace:
     __metaclass__ = ABCMeta
 
     # override the + operator for elements of the Vector Space
@@ -50,10 +50,7 @@ class VectorSpace():
     # calculates the magnitude of the caller
     @abstractmethod
     def norm(self):
-        sumOfSquares = 0.0
-        for component in self._components:
-            sumOfSquares += component ** 2
-        return math.sqrt(sumOfSquares)
+        return math.sqrt(sum(component ** 2 for component in self._components))
 
     # using the caller, derives a new element of the Vector Space with magnitude 1
     @abstractmethod

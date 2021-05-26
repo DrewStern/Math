@@ -1,5 +1,6 @@
 import math
-from src.Vector import Vector
+
+from src.Tools import Tools
 from src.VectorSpace import VectorSpace
 
 
@@ -10,7 +11,7 @@ from src.VectorSpace import VectorSpace
 class Bivector(VectorSpace):
 
     def __init__(self, first, second):
-        if type(first) != Vector or type(second) != Vector:
+        if Tools.are_not_same_type(first, second):
             raise TypeError("Bivectors can only be constructed from Vectors")
         self._e1 = first
         self._e2 = second

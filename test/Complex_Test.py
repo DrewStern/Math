@@ -72,10 +72,10 @@ class Complex_Test(unittest.TestCase):
 
     # |q| == sqrt(qq*)
     # where q* is the conjugate
-    @unittest.skip("not ready")
     def test_normSquaredIsSelfTimesConjugate(self):
-        print("\n", self.q.norm(), " ?= ", math.sqrt((self.q * self.q.conjugate()).scalar_part()))
-        self.assertEqual(self.q.norm(), math.sqrt((self.q * self.q.conjugate()).scalar_part()))
+        self_times_conjugate = self.q * self.q.conjugate()
+        self.assertTrue(self_times_conjugate.is_real())
+        self.assertEqual(self.q.norm(), math.sqrt(self_times_conjugate.real_part()))
 
     def test_normalize(self):
         self.assertEqual(self.q.normalize(), self.q / self.qNorm)
