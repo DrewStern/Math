@@ -16,6 +16,9 @@ class Bivector(VectorSpace):
         self._e1 = first
         self._e2 = second
 
+    def reverse(self):
+        return Bivector(self._e2, self._e1)
+
     # Area of a Bivector is defined to be |q||p|*sin(angle_between(q, p)).
     def area(self):
         return self._e1.norm() * self._e2.norm() * math.sin(self._e1.angle_between(self._e2))
