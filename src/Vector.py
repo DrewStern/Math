@@ -46,7 +46,7 @@ class Vector(VectorSpace):
     def dot(self, other):
         if Tools.are_not_same_type(self, other):
             raise TypeError("Dot product may only be calculated between two Vectors.")
-        if Tools.are_not_same_length(self, other):
+        if Tools.are_not_same_length(self._components, other._components):
             raise IndexError("Vectors must be of the same dimension.")
         components = [selfVal * otherVal for selfVal, otherVal in zip(self._components, other._components)]
         return reduce(lambda x, y: x + y, components)
@@ -55,7 +55,7 @@ class Vector(VectorSpace):
     def cross(self, other):
         if Tools.are_not_same_type(self, other):
             raise TypeError("Cross product may only be calculated between two Vectors.")
-        if Tools.are_not_same_length(self, other):
+        if Tools.are_not_same_length(self._components, other._components):
             raise IndexError("Vectors must be of the same dimension.")
         # TODO: consider expanding this to 7 dimensions
         if len(self._components) != 3:
