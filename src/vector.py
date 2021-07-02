@@ -8,8 +8,8 @@ from src.vector_space import VectorSpace
 class Vector(VectorSpace):
 
     def __init__(self, *components):
-        if Tools.is_not_numeric_type(components):
-            raise TypeError("Parameter must be of numeric type")
+        # if Tools.is_not_numeric_type(components):
+        #     raise TypeError("Parameter must be of numeric type")
         self._components = list(components)
 
     # Multiplies a Vector by a Scalar.

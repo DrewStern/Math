@@ -3,7 +3,7 @@ import math
 from src.quaternion import Quaternion
 
 
-class Quaternion_Test(unittest.TestCase):
+class QuaternionTestCases(unittest.TestCase):
 
     def setUp(self):
         self.addTypeEqualityFunc(Quaternion, 'assertQuaternionsEqual')

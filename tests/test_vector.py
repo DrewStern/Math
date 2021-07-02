@@ -3,7 +3,7 @@ import math
 from src.vector import Vector
 
 
-class Vector_Test(unittest.TestCase):
+class VectorTestCases(unittest.TestCase):
 
     def setUp(self):
         self.addTypeEqualityFunc(Vector, 'assertVectorsEqual')

@@ -28,21 +28,21 @@ class Bivector_Test(unittest.TestCase):
             Bivector(1, Vector(1, 0, 0))
 
     def test_area(self):
-        self.assertEquals(self.unit_ij.area(), 1)
-        self.assertEquals(self.unit_jk.area(), 1)
-        self.assertEquals(self.unit_ki.area(), 1)
+        self.assertEqual(self.unit_ij.area(), 1)
+        self.assertEqual(self.unit_jk.area(), 1)
+        self.assertEqual(self.unit_ki.area(), 1)
 
     def test_orientation(self):
-        self.assertEquals(self.unit_ij.orientation(), self.unit_i * self.unit_j)
+        self.assertEqual(self.unit_ij.orientation(), self.unit_i * self.unit_j)
 
     def test_dual(self):
-        self.assertEquals(self.unit_ij.dual(), self.unit_k)
-        self.assertEquals(self.unit_jk.dual(), self.unit_i)
-        self.assertEquals(self.unit_ki.dual(), self.unit_j)
+        self.assertEqual(self.unit_ij.dual(), self.unit_k)
+        self.assertEqual(self.unit_jk.dual(), self.unit_i)
+        self.assertEqual(self.unit_ki.dual(), self.unit_j)
 
-        self.assertEquals(self.unit_ji.dual(), -self.unit_k)
-        self.assertEquals(self.unit_kj.dual(), -self.unit_i)
-        self.assertEquals(self.unit_ik.dual(), -self.unit_j)
+        self.assertEqual(self.unit_ji.dual(), -self.unit_k)
+        self.assertEqual(self.unit_kj.dual(), -self.unit_i)
+        self.assertEqual(self.unit_ik.dual(), -self.unit_j)
 
     def assertVectorsEqual(self, q, p, msg=None):
         return all(qVal == pVal for qVal, pVal in zip(q._components, p._components))

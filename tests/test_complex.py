@@ -3,7 +3,7 @@ import math
 from src.complex import Complex
 
 
-class Complex_Test(unittest.TestCase):
+class ComplexTestCases(unittest.TestCase):
 
     def setUp(self):
         self.addTypeEqualityFunc(Complex, 'assertComplexEqual')

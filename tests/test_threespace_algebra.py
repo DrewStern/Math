@@ -3,7 +3,7 @@ import unittest
 from src.multivector import Multivector
 
 
-class APS_Test(unittest.TestCase):
+class ThreespaceAlgebraTestCases(unittest.TestCase):
 
     def setUp(self):
         self.addTypeEqualityFunc(Multivector, 'assertMultivectorsEqual')
