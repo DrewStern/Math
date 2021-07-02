@@ -1,8 +1,8 @@
 import math
 
-from src.Tools import Tools
-from src.Vector import Vector
-from src.VectorSpace import VectorSpace
+from src.tools import Tools
+from src.vector import Vector
+from src.vector_space import VectorSpace
 
 
 # A Quaternion is an element which can be denoted as a*1 + b*i + c*j + d*k for a, b, c, d in the Real numbers.
@@ -75,7 +75,7 @@ class Quaternion(VectorSpace):
             raise ZeroDivisionError("Unable to divide by zero.")
         return self.conjugate() / length
 
-    # TODO: need a test for this
+    # TODO: need a tests for this
     def exp(self):
         coefficient = math.e ** self.h
         evenPart = Quaternion(math.cos(self.norm()), 0, 0, 0)

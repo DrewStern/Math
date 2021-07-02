@@ -1,10 +1,10 @@
 import math
 
-from src.Tools import Tools
-from src.VectorSpace import VectorSpace
+from src.tools import Tools
+from src.vector_space import VectorSpace
 
 
-# TODO: this will probably be phased out in favor of a general Multivector.py class -
+# TODO: this will probably be phased out in favor of a general multivector.py class -
 # don't want to create classes which enumerate the number of Vector parameters that it takes
 # that is, we don't want to bother creating Trivector, Quadvector, etc classes
 # all of the necessary forms should be derived from the dimension of the underlying VectorSpace

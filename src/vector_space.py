@@ -4,7 +4,7 @@ import math
 
 
 # abstract class representing a Vector Space with an unknown number of dimensions
-from src.Tools import Tools
+from src.tools import Tools
 
 
 class VectorSpace:

@@ -1,6 +1,6 @@
 import unittest
 
-from src.Multivector import Multivector
+from src.multivector import Multivector
 
 
 class APS_Test(unittest.TestCase):

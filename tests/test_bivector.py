@@ -1,6 +1,6 @@
 import unittest
-from src.Vector import Vector
-from src.Bivector import Bivector
+from src.vector import Vector
+from src.bivector import Bivector
 
 
 class Bivector_Test(unittest.TestCase):

@@ -1,10 +1,10 @@
-from src import Vector, Bivector, Pseudoscalar
+from src import vector, bivector, pseudoscalar
 
 
 class Multivector():
 
     # these parameters are the coefficients
-    def __init__(self, scalar, vector: Vector, bivector: Bivector, pseudoscalar: Pseudoscalar):
+    def __init__(self, scalar, vector: vector, bivector: bivector, pseudoscalar: pseudoscalar):
         self._scalar = scalar
         self._vector = vector
         self._bivector = bivector

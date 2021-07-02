@@ -1,7 +1,7 @@
 import math
 
-from src.Tools import Tools
-from src.VectorSpace import VectorSpace
+from src.tools import Tools
+from src.vector_space import VectorSpace
 
 
 class Complex(VectorSpace):
@@ -43,7 +43,7 @@ class Complex(VectorSpace):
             return Complex(1, 0)
         if power > 0:
             return self * (self ** (power - 1))
-        # TODO: need a test for this case
+        # TODO: need a tests for this case
         if power < 0:
             return self.reciprocal() * (self.reciprocal() ** (power - 1))
 

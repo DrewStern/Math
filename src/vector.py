@@ -1,8 +1,8 @@
 import math
 from functools import *
 
-from src.Tools import Tools
-from src.VectorSpace import VectorSpace
+from src.tools import Tools
+from src.vector_space import VectorSpace
 
 
 class Vector(VectorSpace):

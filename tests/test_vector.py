@@ -1,6 +1,6 @@
 import unittest
 import math
-from src.Vector import Vector
+from src.vector import Vector
 
 
 class Vector_Test(unittest.TestCase):
