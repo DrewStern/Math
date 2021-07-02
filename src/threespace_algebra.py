@@ -22,7 +22,7 @@ class GeometricAlgebraService:
         self.outer_space_service = outer_space_service
 
 
-class AlgebraOfPhysicalSpace:
+class ThreespaceAlgebra:
     def __init__(self,
                  geometric_product_space_service: GeometricAlgebraService,
                  ):
