@@ -1,4 +1,4 @@
-from src import vector, bivector, pseudoscalar
+from src.elements import pseudoscalar, bivector, vector
 
 
 class Multivector():

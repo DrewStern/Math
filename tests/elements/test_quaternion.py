@@ -1,6 +1,6 @@
 import unittest
 import math
-from src.quaternion import Quaternion
+from src.elements.quaternion import Quaternion
 
 
 class QuaternionTestCases(unittest.TestCase):

@@ -1,8 +1,8 @@
 import math
 
 from src.tools import Tools
-from src.vector import Vector
-from src.vector_space import VectorSpace
+from src.elements.vector import Vector
+from src.algebras.vector_space import VectorSpace
 
 
 # A Quaternion is an element which can be denoted as a*1 + b*i + c*j + d*k for a, b, c, d in the Real numbers.

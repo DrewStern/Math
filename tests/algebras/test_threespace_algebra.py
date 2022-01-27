@@ -1,6 +1,6 @@
 import unittest
 
-from src.multivector import Multivector
+from src.elements.multivector import Multivector
 
 
 class ThreespaceAlgebraTestCases(unittest.TestCase):

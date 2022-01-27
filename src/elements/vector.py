@@ -2,7 +2,7 @@ import math
 from functools import *
 
 from src.tools import Tools
-from src.vector_space import VectorSpace
+from src.algebras.vector_space import VectorSpace
 
 
 class Vector(VectorSpace):

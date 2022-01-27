@@ -1,7 +1,7 @@
 import math
 
 from src.tools import Tools
-from src.vector_space import VectorSpace
+from src.algebras.vector_space import VectorSpace
 
 
 class Complex(VectorSpace):
